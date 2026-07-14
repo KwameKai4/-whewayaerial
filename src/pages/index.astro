@@ -5,7 +5,7 @@ import Header from '../components/Header.astro';
 import ArrowIcon from '../components/ArrowIcon.astro';
 import heroImage from '../assets/hero-photogrammetry.png';
 import mappedImage from '../assets/mapped-property.png';
-import { sitePath } from '../utils/sitePath';
+import { isRepositoryPreview, sitePath } from '../utils/sitePath';
 
 const siteEmail = 'hello@whewayaerial.co.uk';
 
@@ -317,8 +317,14 @@ const jsonLd = {
           ))}
         </fieldset>
         <div class="field field-wide"><label for="message">What do you need captured or delivered?</label><textarea id="message" name="message" rows="5" placeholder="Tell me about your project..." required></textarea></div>
-        <button class="button submit-button" type="submit">Check my site <ArrowIcon /></button>
-        <p class="form-note" aria-live="polite">No obligation. Site feasibility is checked before a quote. Your details are only used to respond to this enquiry.</p>
+        <button class="button submit-button" type="submit" disabled={isRepositoryPreview}>
+          {isRepositoryPreview ? 'Enquiries open at launch' : 'Check my site'} <ArrowIcon />
+        </button>
+        <p class="form-note" aria-live="polite">
+          {isRepositoryPreview
+            ? 'Preview site. Online enquiries will open when whewayaerial.co.uk and its form service are connected.'
+            : 'No obligation. Site feasibility is checked before a quote. Your details are only used to respond to this enquiry.'}
+        </p>
       </form>
     </section>
   </main>
