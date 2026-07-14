@@ -1,0 +1,74 @@
+---
+import ArrowIcon from './ArrowIcon.astro';
+import { sitePath } from '../utils/sitePath';
+---
+
+<header class="site-header" data-header>
+  <a class="wordmark" href={sitePath('/')} aria-label="WhewayAerial home">Wheway<span>Aerial</span></a>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+    <span class="sr-only">Open navigation</span>
+    <span></span><span></span>
+  </button>
+  <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+    <a href={sitePath('/#services')}>Services</a>
+    <a href={sitePath('/#process')}>How it works</a>
+    <a href={sitePath('/#work')}>Sample outputs</a>
+    <a href={sitePath('/#pricing')}>Pricing</a>
+    <a href={sitePath('/#contact')}>Contact</a>
+  </nav>
+  <a class="button button-small header-cta" href={sitePath('/#contact')}>Check your site <ArrowIcon size={18} /></a>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const nav = document.querySelector<HTMLElement>('.site-nav');
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const toggleLabel = toggle?.querySelector<HTMLElement>('.sr-only');
+  const closeMenu = () => {
+    toggle?.setAttribute('aria-expanded', 'false');
+    if (toggleLabel) toggleLabel.textContent = 'Open navigation';
+    nav?.classList.remove('is-open');
+  };
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    if (toggleLabel) toggleLabel.textContent = open ? 'Open navigation' : 'Close navigation';
+    nav?.classList.toggle('is-open', !open);
+  });
+  nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && nav?.classList.contains('is-open')) {
+      closeMenu();
+      toggle?.focus();
+    }
+  });
+  document.addEventListener('click', (event) => {
+    if (header && event.target instanceof Node && !header.contains(event.target)) closeMenu();
+  });
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 980) closeMenu();
+  });
+
+  const updateHeader = () => header?.classList.toggle('is-scrolled', window.scrollY > 24);
+  updateHeader();
+  window.addEventListener('scroll', updateHeader, { passive: true });
+
+  const navLinks = Array.from(nav?.querySelectorAll<HTMLAnchorElement>('a[href*="#"]') ?? []);
+  const sectionObserver = new IntersectionObserver((entries) => {
+    const visible = entries
+      .filter((entry) => entry.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (!visible) return;
+    navLinks.forEach((link) => {
+      const active = link.hash === `#${visible.target.id}`;
+      link.classList.toggle('is-active', active);
+      if (active) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+  }, { rootMargin: '-24% 0px -64%', threshold: [0, 0.25, 0.6] });
+  navLinks.forEach((link) => {
+    const target = document.querySelector(link.hash);
+    if (target) sectionObserver.observe(target);
+  });
+</script>

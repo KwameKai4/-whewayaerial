@@ -1,0 +1,388 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import ArrowIcon from '../components/ArrowIcon.astro';
+import heroImage from '../assets/hero-photogrammetry.png';
+import mappedImage from '../assets/mapped-property.png';
+import { sitePath } from '../utils/sitePath';
+
+const siteEmail = 'hello@whewayaerial.co.uk';
+
+const audiencePaths = [
+  {
+    id: 'property-capture',
+    number: '01',
+    title: 'Property capture',
+    copy: 'For owners and property teams who need clear views of roofs, buildings, land context or visible change.',
+    links: [
+      ['/roof-building-drone-capture/', 'Roof & building capture'],
+      ['/drone-photogrammetry-somerset/', 'Mapped site photogrammetry'],
+    ],
+  },
+  {
+    id: 'marketing-3d',
+    number: '02',
+    title: 'Marketing & 3D presentation',
+    copy: 'For agents, developers and owners who need strong aerial context or a shareable visual property model.',
+    links: [
+      ['/property-marketing-drone/', 'Property marketing imagery'],
+      ['/3d-property-models/', 'Visual 3D property models'],
+    ],
+  },
+];
+
+const steps = [
+  ['Scope', 'Tell us the outcome you need.'],
+  ['Plan & fly', 'We check access, airspace and weather.'],
+  ['Process', 'Imagery is aligned and reconstructed.'],
+  ['Deliver', 'Receive images, maps and model files.'],
+];
+
+const conceptStages = [
+  ['capture', '01', 'Capture', 'Overlapping aerial images create complete coverage around the building.', 'High-resolution source imagery'],
+  ['cloud', '02', 'Point cloud', 'Matched image features become a dense spatial dataset for reconstruction.', 'Dense point cloud'],
+  ['ortho', '03', 'Orthomosaic', 'Corrected imagery is stitched into one consistent top-down site view.', 'GeoTIFF / high-resolution image'],
+  ['twin', '04', 'Digital twin', 'Geometry and image texture combine into an easy-to-share visual 3D model.', 'Textured mesh / share link'],
+];
+
+const prices = [
+  { title: 'Building capture', price: '199', copy: 'Organised aerial imagery for one straightforward small property or structure.', included: 'Planned flight + checked JPG image set', format: 'Secure digital image delivery' },
+  { title: 'Visual 3D twin', price: '349', copy: 'Capture, processing and a textured visual model for one small building.', included: 'Aerial capture + model processing', format: 'Share link; OBJ / FBX where suitable' },
+  { title: 'Mapped site', price: '499', copy: 'Orthomosaic and visual model outputs for a straightforward compact site.', included: 'Mapped capture + orthomosaic processing', format: 'GeoTIFF / image; model where scoped' },
+];
+
+const faqs = [
+  ['What can you model?', 'Buildings, roofs, compact sites, land features and visible structures that can be safely photographed from enough angles. We confirm suitability before booking.'],
+  ['How accurate is the output?', 'Launch deliverables are intended for visualisation, planning context and project support. Accuracy depends on the site, flight pattern and control data; survey-grade accuracy is only supplied when it is explicitly scoped and verified.'],
+  ['What happens if the weather turns?', 'Wind, rain and visibility can affect both safety and model quality. If conditions are unsuitable, we will rearrange the flight rather than compromise the result.'],
+  ['Can you fly at every site?', 'No. Airspace, nearby people, access, landowner permission and local restrictions all matter. Every enquiry receives a feasibility and risk check before a date is confirmed.'],
+  ['How quickly will I receive the files?', 'Straightforward image sets are usually ready within a few working days. Maps and 3D models take longer to process; your quote will include a clear delivery window.'],
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebSite', '@id': 'https://whewayaerial.co.uk/#website', url: 'https://whewayaerial.co.uk/', name: 'WhewayAerial', inLanguage: 'en-GB' },
+    {
+      '@type': 'Organization',
+      '@id': 'https://whewayaerial.co.uk/#organization',
+      name: 'WhewayAerial',
+      url: 'https://whewayaerial.co.uk/',
+      email: siteEmail,
+      areaServed: [{ '@type': 'AdministrativeArea', name: 'Somerset' }, { '@type': 'City', name: 'Taunton' }],
+      description: 'Taunton-based drone photogrammetry, property capture and visual 3D modelling across Somerset.',
+    },
+  ],
+};
+---
+
+<BaseLayout title="Drone Photogrammetry Somerset | WhewayAerial" description="Taunton-based drone photogrammetry for property owners, agents and developers. Building capture, orthomosaics and visual 3D models across Somerset.">
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <Header />
+  <main id="top">
+    <section class="hero topo-bg" aria-labelledby="hero-title">
+      <div class="hero-media" aria-hidden="true">
+        <Image src={heroImage} alt="" widths={[640, 960, 1400, 1920]} sizes="(max-width: 760px) 100vw, 64vw" format="webp" quality={88} loading="eager" fetchpriority="high" />
+      </div>
+      <div class="hero-content">
+        <h1 id="hero-title">Drone photogrammetry and <span>3D property models</span> in Somerset.</h1>
+        <p class="hero-brandline">See the site. Understand the space.</p>
+        <p class="hero-summary">Clear aerial imagery, mapped outputs and shareable visual models for property owners, agents and developers.</p>
+        <div class="hero-actions">
+          <a class="button" href="#contact">Check your site <ArrowIcon /></a>
+          <a class="text-link" href="#work">View sample outputs <ArrowIcon /></a>
+        </div>
+        <div class="hero-shortcuts" aria-label="Choose what you need">
+          <a href="#property-capture" data-service="Building capture"><span>01</span>I need property capture</a>
+          <a href="#marketing-3d" data-service="Visual 3D twin"><span>02</span>I need marketing / a 3D model</a>
+        </div>
+        <p class="location-line">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-6.1 6-12a6 6 0 1 0-12 0c0 5.9 6 12 6 12Z"/><circle cx="12" cy="9" r="2"/></svg>
+          Based in Taunton <span>·</span> Working across Somerset
+        </p>
+      </div>
+    </section>
+
+    <section class="services-section section topo-bg" id="services" aria-labelledby="services-title">
+      <div class="section-copy reveal">
+        <p class="section-label">Services</p>
+        <h2 id="services-title">Start with what you need to understand.</h2>
+        <p class="lede">Two straightforward routes into the right capture and delivery scope.</p>
+        <div class="audience-paths">
+          {audiencePaths.map((path) => (
+            <article class="audience-path" id={path.id}>
+              <span>{path.number}</span>
+              <div><h3>{path.title}</h3><p>{path.copy}</p>
+                <ul>{path.links.map(([href, label]) => <li><a href={sitePath(href)}>{label}<ArrowIcon size={16} /></a></li>)}</ul>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+      <div class="services-media reveal">
+        <Image src={heroImage} alt="A Somerset stone building transitioning from aerial photography into a photogrammetry point cloud" widths={[640, 960, 1400]} sizes="(max-width: 900px) 100vw, 54vw" format="webp" quality={84} loading="lazy" />
+      </div>
+    </section>
+
+    <section class="process-section section topo-bg" id="process" aria-labelledby="process-title">
+      <div class="reveal">
+        <p class="section-label">Workflow</p>
+        <h2 id="process-title">From brief to usable model.</h2>
+      </div>
+      <ol class="process-rail reveal">
+        {steps.map(([title, copy], index) => (
+          <li>
+            <div class="step-index">
+              <span class="step-number">{String(index + 1).padStart(2, '0')}</span>
+              <span class="rail-dot" aria-hidden="true"></span>
+            </div>
+            <div class="step-copy"><h3>{title}</h3><p>{copy}</p></div>
+          </li>
+        ))}
+      </ol>
+      <p class="accuracy-note reveal">Outputs are for visualisation and project support unless a survey-grade specification is agreed.</p>
+    </section>
+
+    <section class="concept-section section" id="work" aria-labelledby="concept-title">
+      <div class="concept-heading reveal">
+        <div>
+          <p class="section-label">Sample outputs</p>
+          <h2 id="concept-title">One flight.<br /><span>Four useful views.</span></h2>
+        </div>
+        <p>This illustrative sample shows how the same capture can move from source imagery to a usable visual twin. It is sample data, not client work.</p>
+      </div>
+
+      <div class="concept-viewer reveal" data-concept-viewer>
+        <div class="concept-visual" data-concept-visual="capture" aria-hidden="true">
+          <svg viewBox="0 0 900 620">
+            <defs>
+              <pattern id="site-grid" width="34" height="34" patternUnits="userSpaceOnUse">
+                <path d="M34 0H0V34" fill="none" stroke="currentColor" stroke-opacity=".12" />
+              </pattern>
+              <filter id="soft-glow"><feGaussianBlur stdDeviation="7" /></filter>
+            </defs>
+            <rect width="900" height="620" fill="url(#site-grid)" />
+            <g class="terrain-lines" fill="none" stroke="currentColor">
+              <path d="M-35 126C104 18 207 210 340 104S581 14 696 106s192 49 250-7" />
+              <path d="M-28 193C99 88 215 272 350 169S587 83 706 171s178 54 230-4" />
+              <path d="M-45 469C112 349 226 547 375 430s277-83 396 18 159 67 205 31" />
+              <path d="M-36 535C99 429 234 607 383 501s265-72 382 20 170 64 211 38" />
+            </g>
+            <g class="building-shadow" transform="translate(450 318)">
+              <path d="M-154-43 3-132l164 83-4 168L8 198l-166-85Z" />
+            </g>
+            <g class="building-wire" transform="translate(450 292)" fill="none" stroke="currentColor">
+              <path d="M-154-43 3-132l164 83-4 168L8 198l-166-85Z" />
+              <path d="m-154-43 164 83 157-89M10 40 8 198M-158 113 10 40l153 79" />
+              <path d="m-99-73 109 56 103-59v69L10 50-99-6Z" />
+            </g>
+            <g class="capture-layer" fill="none" stroke="currentColor">
+              <path d="M176 169C295 79 650 80 735 221S676 499 441 523 142 403 176 169Z" stroke-dasharray="9 12" />
+              <g fill="currentColor" stroke="none">
+                <circle cx="176" cy="169" r="7"/><circle cx="340" cy="105" r="7"/><circle cx="573" cy="117" r="7"/><circle cx="735" cy="221" r="7"/><circle cx="708" cy="414" r="7"/><circle cx="441" cy="523" r="7"/><circle cx="210" cy="442" r="7"/>
+              </g>
+            </g>
+            <g class="cloud-layer" fill="currentColor">
+              {Array.from({ length: 46 }, (_, index) => {
+                const x = 294 + ((index * 83) % 330);
+                const y = 178 + ((index * 47) % 250);
+                return <circle cx={x} cy={y} r={(index % 3) + 2} />;
+              })}
+            </g>
+            <g class="ortho-layer">
+              <path d="M238 133h425v364H238z" fill="currentColor" opacity=".08" />
+              <path d="M238 133h425v364H238zM238 224h425M238 315h425M238 406h425M344 133v364M450 133v364M556 133v364" fill="none" stroke="currentColor" />
+            </g>
+            <g class="twin-layer" transform="translate(450 292)" fill="currentColor" opacity=".16" filter="url(#soft-glow)">
+              <path d="M-154-43 3-132l164 83-4 168L8 198l-166-85Z" />
+            </g>
+          </svg>
+          <span class="visual-coordinates">51.0151° N&nbsp;&nbsp; 3.1068° W</span>
+          <span class="visual-status"><i></i> Illustrative sample data</span>
+        </div>
+
+        <div class="concept-controls">
+          <div class="concept-tabs" aria-label="Sample output stages">
+            {conceptStages.map(([id, number, title, copy, output], index) => (
+              <button type="button" class:list={['concept-tab', { 'is-active': index === 0 }]} data-concept={id} data-title={title} data-copy={copy} data-output={output} aria-pressed={index === 0 ? 'true' : 'false'}>
+                <span>{number}</span>{title}
+              </button>
+            ))}
+          </div>
+          <div class="concept-detail" aria-live="polite">
+            <p class="concept-kicker">Selected output</p>
+            <h3 data-concept-title>{conceptStages[0][2]}</h3>
+            <p data-concept-copy>{conceptStages[0][3]}</p>
+            <div><span>Typical delivery</span><strong data-concept-output>{conceptStages[0][4]}</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="portfolio-queue reveal" aria-label="Future portfolio categories">
+        <p>Real-project library</p>
+        <div><span>01</span><strong>Property capture</strong><small>Portfolio space reserved for approved work</small></div>
+        <div><span>02</span><strong>Site mapping</strong><small>Portfolio space reserved for approved work</small></div>
+      </div>
+    </section>
+
+    <section class="pricing-section section topo-bg" id="pricing" aria-labelledby="pricing-title">
+      <div class="pricing-intro reveal">
+        <p class="section-label">Pricing</p>
+        <h2 id="pricing-title">Straightforward starting points<span>.</span></h2>
+        <p>Every site is different. These guide prices cover straightforward local projects; the final quote confirms access, airspace, travel, processing scope and any applicable VAT.</p>
+      </div>
+      <div class="pricing-ledger reveal">
+        {prices.map((item, index) => (
+          <article class="price-column">
+            <span class="price-index">0{index + 1}</span>
+            <h3>{item.title}</h3>
+            <p class="price"><span>from</span> £{item.price}</p>
+            <p>{item.copy}</p>
+            <dl class="price-details"><div><dt>Includes</dt><dd>{item.included}</dd></div><div><dt>Delivery</dt><dd>{item.format}</dd></div></dl>
+            <a class="text-link" href="#contact" data-service={item.title}>Check this service <ArrowIcon /></a>
+          </article>
+        ))}
+      </div>
+      <div class="deliverables reveal">
+        <div class="deliverables-list">
+          <p class="section-label">What you can receive</p>
+          <ul>
+            <li>High-resolution image set</li><li>Orthomosaic image</li><li>Textured 3D mesh</li>
+            <li>Point cloud</li><li>Shareable model link</li><li>OBJ / FBX / GeoTIFF where suitable</li>
+          </ul>
+        </div>
+        <div class="deliverables-image">
+          <Image src={mappedImage} alt="Aerial photogrammetry capture of a compact Somerset property" widths={[640, 960, 1400]} sizes="(max-width: 760px) 100vw, 48vw" format="webp" quality={86} loading="lazy" />
+          <div class="file-strip" aria-hidden="true">
+            <span>IMG_0456.JPG <small>Image</small></span>
+            <span>SITE_ORTHO.TIF <small>GeoTIFF</small></span>
+            <span>SITE_MESH.OBJ <small>3D mesh</small></span>
+            <span>MODEL_LINK.URL <small>Share link</small></span>
+          </div>
+        </div>
+      </div>
+      <div class="local-band reveal">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-6.1 6-12a6 6 0 1 0-12 0c0 5.9 6 12 6 12Z"/><circle cx="12" cy="9" r="2"/></svg>
+        <p>Taunton-based. <span>Somerset-wide.</span></p>
+        <small>Travel requirements and any applicable VAT are confirmed before booking.<br />Survey-grade accuracy is not implied.</small>
+      </div>
+    </section>
+
+    <section class="about-section section topo-bg" id="about" aria-labelledby="about-title">
+      <div class="about-copy reveal">
+        <p class="section-label">About</p>
+        <h2 id="about-title">Independent.<br />Taunton-based.</h2>
+        <p>WhewayAerial is a founder-led drone studio focused on turning aerial imagery into useful property views, maps and visual 3D models. You deal directly with the operator from the first site check to delivery.</p>
+        <p class="operator-note">Operator registration, relevant remote-pilot competency and third-party insurance can be verified during scoping and before booking.</p>
+      </div>
+      <div class="trust-list reveal">
+        <div><span>01</span><p>Feasibility checked<br />before booking</p></div>
+        <div><span>02</span><p>Weather-aware<br />scheduling</p></div>
+        <div><span>03</span><p>Credentials and insurance<br />available on request</p></div>
+        <div><span>04</span><p>Clear scope and<br />file formats</p></div>
+      </div>
+    </section>
+
+    <section class="faq-section section" aria-labelledby="faq-title">
+      <div class="faq-heading reveal"><p class="section-label">FAQ</p><h2 id="faq-title">Before<br />we fly</h2></div>
+      <div class="faq-list reveal">
+        {faqs.map(([question, answer], index) => (
+          <details open={index === 0}>
+            <summary>{question}<span aria-hidden="true"></span></summary>
+            <p>{answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="contact-section topo-bg" id="contact" aria-labelledby="contact-title">
+      <div class="contact-copy reveal">
+        <p class="section-label">Contact</p>
+        <h2 id="contact-title">Check your site<br />and get a clear<br />next step.</h2>
+        <p class="contact-reassurance">Share the location and intended outcome. Access, airspace and likely deliverables are reviewed before a quote.</p>
+        <p>Prefer email?<br /><a href={`mailto:${siteEmail}`}>{siteEmail}</a></p>
+      </div>
+      <form class="contact-form reveal" name="enquiry" method="POST" action={sitePath('/thanks')} data-netlify="true" netlify-honeypot="company-website">
+        <input type="hidden" name="form-name" value="enquiry" />
+        <p class="honeypot"><label>Do not fill this out: <input name="company-website" /></label></p>
+        <div class="field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" placeholder="Your name" required /></div>
+        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required /></div>
+        <div class="field"><label for="location">Project location</label><input id="location" name="location" autocomplete="address-level2" placeholder="e.g. Taunton, Somerset" required /></div>
+        <div class="field"><label for="phone">Phone (optional)</label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="Only if you would like a call" /></div>
+        <fieldset class="service-choice">
+          <legend>Service</legend>
+          {['Building capture', 'Visual 3D twin', 'Mapped site', 'Progress monitoring', 'Not sure yet'].map((service, index) => (
+            <label><input type="radio" name="service" value={service} checked={index === 4} /><span>{service}</span></label>
+          ))}
+        </fieldset>
+        <div class="field field-wide"><label for="message">What do you need captured or delivered?</label><textarea id="message" name="message" rows="5" placeholder="Tell me about your project..." required></textarea></div>
+        <button class="button submit-button" type="submit">Check my site <ArrowIcon /></button>
+        <p class="form-note" aria-live="polite">No obligation. Site feasibility is checked before a quote. Your details are only used to respond to this enquiry.</p>
+      </form>
+    </section>
+  </main>
+
+  <a class="mobile-quote-bar" href="#contact">Check your site <ArrowIcon size={18} /></a>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="#top">Wheway<span>Aerial</span></a>
+    <nav aria-label="Footer navigation"><a href="#services">Services</a><a href="#pricing">Pricing</a><a href="#contact">Contact</a><a href={sitePath('/privacy')}>Privacy</a></nav>
+    <p>WhewayAerial · Taunton, Somerset</p>
+  </footer>
+
+  <script>
+    const revealElements = document.querySelectorAll<HTMLElement>('.reveal');
+    revealElements.forEach((element) => element.classList.add('is-ready'));
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -48px' });
+    revealElements.forEach((element) => revealObserver.observe(element));
+
+    const selectService = (service: string | null | undefined) => {
+      if (!service) return;
+      const input = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="service"]')).find((item) => item.value === service);
+      if (input) input.checked = true;
+    };
+    document.querySelectorAll<HTMLElement>('[data-service]').forEach((link) => {
+      link.addEventListener('click', () => selectService(link.dataset.service));
+    });
+    selectService(new URLSearchParams(window.location.search).get('service'));
+
+    const conceptVisual = document.querySelector<HTMLElement>('[data-concept-visual]');
+    const conceptTitle = document.querySelector<HTMLElement>('[data-concept-title]');
+    const conceptCopy = document.querySelector<HTMLElement>('[data-concept-copy]');
+    const conceptOutput = document.querySelector<HTMLElement>('[data-concept-output]');
+    document.querySelectorAll<HTMLButtonElement>('[data-concept]').forEach((button) => {
+      button.addEventListener('click', () => {
+        if (!conceptVisual || !conceptTitle || !conceptCopy || !conceptOutput || !button.dataset.concept) return;
+        document.querySelectorAll<HTMLButtonElement>('[data-concept]').forEach((item) => {
+          const active = item === button;
+          item.classList.toggle('is-active', active);
+          item.setAttribute('aria-pressed', String(active));
+        });
+        conceptVisual.dataset.conceptVisual = button.dataset.concept;
+        conceptTitle.textContent = button.dataset.title ?? '';
+        conceptCopy.textContent = button.dataset.copy ?? '';
+        conceptOutput.textContent = button.dataset.output ?? '';
+      });
+    });
+
+    const form = document.querySelector<HTMLFormElement>('.contact-form');
+    const formNote = document.querySelector<HTMLElement>('.form-note');
+    form?.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[required]').forEach((field) => {
+      field.addEventListener('invalid', () => {
+        field.setAttribute('aria-invalid', 'true');
+        if (formNote) formNote.textContent = 'Please complete the highlighted fields so I can scope your enquiry.';
+      });
+      field.addEventListener('input', () => {
+        if (field.checkValidity()) field.removeAttribute('aria-invalid');
+      });
+    });
+  </script>
+</BaseLayout>

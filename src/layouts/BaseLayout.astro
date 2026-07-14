@@ -1,0 +1,101 @@
+---
+import '../styles/global.css';
+import { getImage } from 'astro:assets';
+import defaultSocialImage from '../assets/hero-photogrammetry.png';
+import { isRepositoryPreview, sitePath } from '../utils/sitePath';
+
+interface Props {
+  title: string;
+  description: string;
+  robots?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description,
+  robots = isRepositoryPreview ? 'noindex, nofollow' : 'index, follow, max-image-preview:large',
+  ogImage,
+} = Astro.props;
+const canonicalURL = new URL(sitePath(Astro.url.pathname), Astro.site);
+const generatedSocialImage = await getImage({
+  src: defaultSocialImage,
+  width: 1200,
+  height: 630,
+  fit: 'cover',
+  position: 'center',
+  format: 'jpg',
+  quality: 82,
+});
+const socialImageURL = new URL(ogImage ?? generatedSocialImage.src, Astro.site);
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#080c0e" />
+    <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="icon" type="image/svg+xml" href={sitePath('/favicon.svg')} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="WhewayAerial" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:image" content={socialImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="WhewayAerial drone photogrammetry and 3D property modelling" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageURL} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+    <script>
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      document.addEventListener('click', (event) => {
+        if (
+          event.defaultPrevented ||
+          event.button !== 0 ||
+          event.metaKey ||
+          event.ctrlKey ||
+          event.shiftKey ||
+          event.altKey ||
+          !(event.target instanceof Element)
+        ) return;
+
+        const link = event.target.closest<HTMLAnchorElement>('a[href*="#"]');
+        if (!link) return;
+
+        const destination = new URL(link.href, window.location.href);
+        if (
+          destination.origin !== window.location.origin ||
+          destination.pathname !== window.location.pathname ||
+          destination.search !== window.location.search ||
+          !destination.hash
+        ) return;
+
+        const target = document.getElementById(decodeURIComponent(destination.hash.slice(1)));
+        if (!target) return;
+
+        event.preventDefault();
+        if (window.location.hash !== destination.hash) {
+          window.history.pushState(null, '', destination.hash);
+        }
+        target.scrollIntoView({
+          behavior: reduceMotion.matches ? 'auto' : 'smooth',
+          block: 'start',
+        });
+      });
+    </script>
+  </body>
+</html>

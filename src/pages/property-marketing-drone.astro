@@ -1,0 +1,47 @@
+---
+import ServicePage from '../components/ServicePage.astro';
+
+const process = [
+  { title: 'Set the story', copy: 'We agree the property features, setting and intended channels the imagery needs to support.' },
+  { title: 'Plan the light and flight', copy: 'Weather, sun position, access, airspace and surrounding property are considered before capture.' },
+  { title: 'Capture useful variety', copy: 'Hero views, wider location context and supporting angles are collected to create a coherent set.' },
+  { title: 'Prepare the assets', copy: 'Selected imagery is processed and delivered at practical sizes for web, listings and presentations.' },
+];
+
+const related = [
+  { href: '/3d-property-models/', label: '3D property models', copy: 'Add an interactive spatial view to property presentation.' },
+  { href: '/roof-building-drone-capture/', label: 'Building capture', copy: 'Prioritise clear visual information over promotional treatment.' },
+  { href: '/drone-photogrammetry-somerset/', label: 'Drone photogrammetry', copy: 'Create mapped or reconstructed site outputs.' },
+];
+---
+
+<ServicePage
+  title="Property Marketing Drone Photography Somerset | WhewayAerial"
+  description="Drone property marketing imagery and optional visual 3D models for agents, developers and property owners across Taunton and Somerset."
+  h1="Aerial property imagery with enough context to tell the whole story."
+  intro="For agents, developers and owners who need more than a high angle, capture is planned around the building, its setting and how the final assets will actually be used."
+  serviceName="Property marketing drone imagery"
+  serviceValue="Building capture"
+  suitableFor={[
+    'Residential and commercial property listings',
+    'Development and investment presentations',
+    'Location and surrounding-land context',
+    'Web, social and stakeholder updates',
+  ]}
+  deliverables={[
+    'Edited high-resolution aerial stills',
+    'Web-ready copies for practical publishing',
+    'A coherent mix of hero and context views',
+    'Optional visual 3D property model when separately scoped',
+  ]}
+  process={process}
+  limitations={[
+    'Capture depends on safe access, legal flight conditions, suitable weather and respect for neighbouring privacy.',
+    'Staging, ground photography, video and advanced retouching are only included when explicitly quoted.',
+    'Image quantity is agreed by outcome rather than inflated with near-duplicate frames.',
+    'Usage requirements beyond normal property promotion should be discussed before booking.',
+  ]}
+  guidePrice="From £199"
+  priceNote="For a straightforward still-image property capture. A visual 3D model starts from £349; scope, travel and any applicable VAT are confirmed first."
+  related={related}
+/>

@@ -1,0 +1,47 @@
+---
+import ServicePage from '../components/ServicePage.astro';
+
+const process = [
+  { title: 'Define the decision', copy: 'We start with what the images or model need to help you understand, present or record.' },
+  { title: 'Check the site', copy: 'Access, airspace, nearby people, weather and the required viewpoints are reviewed before a flight is booked.' },
+  { title: 'Capture with overlap', copy: 'The building or compact site is photographed from repeatable positions with enough overlap for reconstruction.' },
+  { title: 'Process and deliver', copy: 'Imagery is aligned, checked and prepared in the formats agreed in the quote.' },
+];
+
+const related = [
+  { href: '/3d-property-models/', label: '3D property models', copy: 'Shareable textured models for context and presentation.' },
+  { href: '/roof-building-drone-capture/', label: 'Roof and building capture', copy: 'Organised aerial imagery of difficult-to-view areas.' },
+  { href: '/property-marketing-drone/', label: 'Property marketing', copy: 'Aerial visuals and optional 3D presentation assets.' },
+];
+---
+
+<ServicePage
+  title="Drone Photogrammetry Somerset | WhewayAerial"
+  description="Drone photogrammetry across Taunton and Somerset for property owners, agents and developers. Receive organised imagery, orthomosaics and visual 3D models."
+  h1="Drone photogrammetry for property and compact sites in Somerset."
+  intro="Turn overlapping aerial imagery into a coherent top-down view or visual 3D dataset. The capture is planned around the decision you need to make—not around producing files for their own sake."
+  serviceName="Drone photogrammetry in Somerset"
+  serviceValue="Mapped site"
+  suitableFor={[
+    'Property and development context',
+    'Visual records before or during work',
+    'Compact land, buildings and visible site features',
+    'Stakeholder updates that benefit from one coherent view',
+  ]}
+  deliverables={[
+    'High-resolution source image set',
+    'Orthomosaic image where the site is suitable',
+    'Dense point cloud or textured mesh where scoped',
+    'Shareable model link or common file formats where suitable',
+  ]}
+  process={process}
+  limitations={[
+    'Visual photogrammetry is not automatically a measured or survey-grade product.',
+    'Accuracy depends on the capture plan, site surface, control information and agreed processing method.',
+    'Trees, reflective surfaces, moving objects and hidden areas can reduce completeness.',
+    'Any requirement for verified accuracy must be agreed before capture.',
+  ]}
+  guidePrice="From £499"
+  priceNote="For a straightforward compact mapped site. Access, airspace, processing scope, travel and any applicable VAT are confirmed before booking."
+  related={related}
+/>

@@ -1,0 +1,47 @@
+---
+import ServicePage from '../components/ServicePage.astro';
+
+const process = [
+  { title: 'Choose the viewing goal', copy: 'We agree whether the model is for property context, presentation, project communication or a visual record.' },
+  { title: 'Plan complete coverage', copy: 'Flight paths and ground viewpoints are considered so visible walls, roofs and surrounding context can be reconstructed.' },
+  { title: 'Reconstruct the scene', copy: 'Matched image features are processed into geometry, then textured with the captured photography.' },
+  { title: 'Prepare for sharing', copy: 'The model is checked and delivered by share link or in agreed file formats where suitable.' },
+];
+
+const related = [
+  { href: '/drone-photogrammetry-somerset/', label: 'Drone photogrammetry', copy: 'Mapped aerial data for buildings and compact sites.' },
+  { href: '/property-marketing-drone/', label: 'Property marketing', copy: 'Presentation-led aerial imagery and model options.' },
+  { href: '/roof-building-drone-capture/', label: 'Building capture', copy: 'A focused image set without full 3D reconstruction.' },
+];
+---
+
+<ServicePage
+  title="3D Property Models Somerset | WhewayAerial"
+  description="Shareable visual 3D property models created from drone photogrammetry in Taunton and Somerset for owners, agents, developers and project teams."
+  h1="Visual 3D property models that make space easier to understand."
+  intro="A textured digital twin gives owners, agents and project teams a view they can rotate, revisit and share. Each model is scoped for visual communication rather than implying survey-grade measurement."
+  serviceName="Visual 3D property models"
+  serviceValue="Visual 3D twin"
+  suitableFor={[
+    'Property and development presentations',
+    'Remote stakeholder context',
+    'Visual records of a building at a point in time',
+    'Explaining layout and surroundings more clearly than still images alone',
+  ]}
+  deliverables={[
+    'Processed textured 3D model',
+    'Shareable browser-based model link where suitable',
+    'OBJ or FBX export when agreed',
+    'Supporting aerial image set',
+  ]}
+  process={process}
+  limitations={[
+    'The model represents visible surfaces; enclosed, hidden or obstructed areas are not captured.',
+    'Fine wires, reflective glazing, vegetation and moving objects may reconstruct imperfectly.',
+    'Visual twins are not BIM models, measured surveys or engineering assessments unless separately specified.',
+    'File size and platform compatibility are agreed before export.',
+  ]}
+  guidePrice="From £349"
+  priceNote="For one straightforward small building. Complexity, access, surrounding obstacles, travel and any applicable VAT are confirmed in the quote."
+  related={related}
+/>

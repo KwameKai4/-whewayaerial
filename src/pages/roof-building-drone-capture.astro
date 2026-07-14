@@ -1,0 +1,47 @@
+---
+import ServicePage from '../components/ServicePage.astro';
+
+const process = [
+  { title: 'Identify the areas', copy: 'You tell us which elevations, roof faces or surrounding features need to be visible.' },
+  { title: 'Assess feasibility', copy: 'We review the property, take-off area, airspace, people nearby and suitable weather conditions.' },
+  { title: 'Capture clear angles', copy: 'High-resolution stills are taken from an organised set of useful viewpoints.' },
+  { title: 'Sort and hand over', copy: 'Images are quality checked, named and delivered in a clear folder structure.' },
+];
+
+const related = [
+  { href: '/3d-property-models/', label: '3D property models', copy: 'Reconstruct the whole visible building as a textured model.' },
+  { href: '/drone-photogrammetry-somerset/', label: 'Site photogrammetry', copy: 'Create an orthomosaic or broader mapped output.' },
+  { href: '/property-marketing-drone/', label: 'Property marketing', copy: 'Presentation-led imagery for listings and development stories.' },
+];
+---
+
+<ServicePage
+  title="Roof & Building Drone Capture Somerset | WhewayAerial"
+  description="Organised roof and building drone imagery across Taunton and Somerset for property owners, managers, agents and project teams."
+  h1="Clear aerial views of roofs and hard-to-reach building areas."
+  intro="Building capture provides a high-resolution visual record from angles that are difficult to reach from the ground. The result is an organised image set for review, communication or passing to an appropriate specialist."
+  serviceName="Roof and building drone capture"
+  serviceValue="Building capture"
+  suitableFor={[
+    'Roof and elevation visibility',
+    'Pre-work or progress image records',
+    'Property management context',
+    'Supplying clear imagery to a roofer, surveyor or other specialist',
+  ]}
+  deliverables={[
+    'High-resolution JPG image set',
+    'Organised folders or viewpoint groups',
+    'Wide context images and focused detail views where safely achievable',
+    'Secure digital delivery',
+  ]}
+  process={process}
+  limitations={[
+    'This is visual image capture, not a building condition survey or professional diagnosis.',
+    'Only visible surfaces and details that can be safely photographed are included.',
+    'A qualified specialist should interpret defects, materials and remedial requirements.',
+    'Wind, rain, access restrictions and nearby people may require rescheduling.',
+  ]}
+  guidePrice="From £199"
+  priceNote="For one straightforward small property or structure. Access, airspace, required viewpoints, travel and any applicable VAT are confirmed first."
+  related={related}
+/>
