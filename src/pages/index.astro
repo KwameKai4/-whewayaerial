@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 import ArrowIcon from '../components/ArrowIcon.astro';
 import heroImage from '../assets/hero-photogrammetry.png';
 import mappedImage from '../assets/mapped-property.png';
@@ -331,11 +332,7 @@ const jsonLd = {
 
   <a class="mobile-quote-bar" href="#contact">Check your site <ArrowIcon size={18} /></a>
 
-  <footer class="site-footer">
-    <a class="wordmark" href="#top">Wheway<span>Aerial</span></a>
-    <nav aria-label="Footer navigation"><a href="#services">Services</a><a href="#pricing">Pricing</a><a href="#contact">Contact</a><a href={sitePath('/privacy')}>Privacy</a></nav>
-    <p>WhewayAerial · Taunton, Somerset</p>
-  </footer>
+  <Footer />
 
   <script>
     const revealElements = document.querySelectorAll<HTMLElement>('.reveal');

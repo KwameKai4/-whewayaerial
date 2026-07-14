@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/Footer.astro';
 import { sitePath } from '../utils/sitePath';
 ---
 <BaseLayout title="Enquiry sent | WhewayAerial" description="Your WhewayAerial enquiry has been sent." robots="noindex, follow">
@@ -12,4 +13,5 @@ import { sitePath } from '../utils/sitePath';
       <a class="button" href={sitePath('/')}>Back to WhewayAerial</a>
     </div>
   </main>
+  <Footer />
 </BaseLayout>

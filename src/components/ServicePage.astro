@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from './Header.astro';
+import Footer from './Footer.astro';
 import ArrowIcon from './ArrowIcon.astro';
 import mappedImage from '../assets/mapped-property.png';
 import { sitePath } from '../utils/sitePath';
@@ -145,9 +146,5 @@ const structuredData = {
     </section>
   </main>
 
-  <footer class="site-footer">
-    <a class="wordmark" href={sitePath('/')}>Wheway<span>Aerial</span></a>
-    <nav aria-label="Footer navigation"><a href={sitePath('/#services')}>Services</a><a href={sitePath('/#pricing')}>Pricing</a><a href={sitePath('/#contact')}>Contact</a><a href={sitePath('/privacy')}>Privacy</a></nav>
-    <p>WhewayAerial · Taunton, Somerset</p>
-  </footer>
+  <Footer />
 </BaseLayout>

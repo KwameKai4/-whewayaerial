@@ -1,0 +1,64 @@
+---
+import ArrowIcon from './ArrowIcon.astro';
+import { sitePath } from '../utils/sitePath';
+
+const year = new Date().getFullYear();
+const serviceLinks = [
+  [sitePath('/drone-photogrammetry-somerset/'), 'Drone photogrammetry'],
+  [sitePath('/3d-property-models/'), '3D property models'],
+  [sitePath('/roof-building-drone-capture/'), 'Roof & building capture'],
+  [sitePath('/property-marketing-drone/'), 'Property marketing imagery'],
+];
+const exploreLinks = [
+  [sitePath('/#process'), 'How it works'],
+  [sitePath('/#work'), 'Sample outputs'],
+  [sitePath('/#pricing'), 'Guide pricing'],
+  [sitePath('/#about'), 'About WhewayAerial'],
+  [sitePath('/#contact'), 'Check your site'],
+];
+---
+
+<footer class="site-footer topo-bg" aria-label="WhewayAerial footer">
+  <div class="footer-main">
+    <div class="footer-intro">
+      <a class="wordmark" href={sitePath('/')} aria-label="WhewayAerial home">Wheway<span>Aerial</span></a>
+      <p>Drone photogrammetry, aerial property capture and visual 3D models for property owners, agents and developers across Somerset.</p>
+      <a class="footer-action" href={sitePath('/#contact')}>Start with a site check <ArrowIcon size={18} /></a>
+    </div>
+
+    <div class="footer-directory">
+      <nav class="footer-group" aria-label="Footer services">
+        <p class="footer-heading">Services</p>
+        <ul class="footer-links">
+          {serviceLinks.map(([href, label]) => <li><a href={href}>{label}</a></li>)}
+        </ul>
+      </nav>
+
+      <nav class="footer-group" aria-label="Footer site links">
+        <p class="footer-heading">Explore</p>
+        <ul class="footer-links">
+          {exploreLinks.map(([href, label]) => <li><a href={href}>{label}</a></li>)}
+        </ul>
+      </nav>
+
+      <div class="footer-group footer-contact">
+        <p class="footer-heading">Taunton · Somerset</p>
+        <address>
+          <span>Independent drone services</span>
+          <span>Working across Somerset</span>
+          <a href="mailto:hello@whewayaerial.co.uk">hello@whewayaerial.co.uk</a>
+        </address>
+        <p class="footer-proof">Site feasibility, airspace and likely deliverables are checked before quoting.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-base">
+    <p>© {year} WhewayAerial</p>
+    <p>Drone photogrammetry and 3D property modelling in Taunton, Somerset.</p>
+    <nav aria-label="Footer legal links">
+      <a href={sitePath('/privacy')}>Privacy</a>
+      <a href={sitePath('/#contact')}>Contact</a>
+    </nav>
+  </div>
+</footer>
