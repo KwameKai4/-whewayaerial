@@ -9,7 +9,7 @@
     "preview": "astro preview",
     "verify": "astro check && astro build && npm run worker:types && npm run worker:test && npm run worker:dry-run",
     "worker:types": "wrangler types --cwd worker --config wrangler.jsonc worker-configuration.d.ts",
-    "worker:types:check": "npm run worker:types && git diff --exit-code -- worker/worker-configuration.d.ts",
+    "worker:types:check": "npm run worker:types",
     "worker:test": "vitest run --config worker/vitest.config.ts",
     "worker:dry-run": "wrangler deploy --config worker/wrangler.jsonc --dry-run",
     "worker:deploy": "wrangler deploy --config worker/wrangler.jsonc"

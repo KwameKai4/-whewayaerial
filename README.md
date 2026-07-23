@@ -30,4 +30,4 @@ Before the Worker deployment workflow can succeed:
 5. Add Worker secrets with `npx wrangler secret put TURNSTILE_SECRET_KEY --config worker/wrangler.jsonc` and `npx wrangler secret put IP_HASH_SECRET --config worker/wrangler.jsonc`.
 6. Add GitHub repository secrets `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN`. Scope the token to this Worker, Worker routes, and the zone resources required by the deployment.
 
-The Worker deploys to the custom domain `forms.whewaydrones.co.uk`. Run `npm run worker:types` after changing `worker/wrangler.jsonc`; the generated binding types are committed and checked in CI.
+The Worker deploys to the custom domain `forms.whewaydrones.co.uk`. Run `npm run worker:types` after changing `worker/wrangler.jsonc`; the generated binding types are committed and regenerated in CI before tests.
