@@ -1,11 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import BrandLogo from '../components/BrandLogo.astro';
 import Footer from '../components/Footer.astro';
 import { sitePath } from '../utils/sitePath';
 ---
 <BaseLayout title="Enquiry sent | WhewayDrones" description="Your WhewayDrones enquiry has been sent." robots="noindex, follow">
   <main class="thanks-page topo-bg">
-    <a class="wordmark" href={sitePath('/')}>Wheway<span>Drones</span></a>
+    <a class="wordmark" href={sitePath('/')} aria-label="WhewayDrones home"><BrandLogo /></a>
     <div>
       <p class="section-label">Enquiry received</p>
       <h1>Thanks. I’ll take a look.</h1>

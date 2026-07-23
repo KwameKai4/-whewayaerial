@@ -1,5 +1,6 @@
 ---
 import ArrowIcon from './ArrowIcon.astro';
+import BrandLogo from './BrandLogo.astro';
 import { sitePath } from '../utils/sitePath';
 
 const year = new Date().getFullYear();
@@ -21,7 +22,7 @@ const exploreLinks = [
 <footer class="site-footer topo-bg" aria-label="WhewayDrones footer">
   <div class="footer-main">
     <div class="footer-intro">
-      <a class="wordmark" href={sitePath('/')} aria-label="WhewayDrones home">Wheway<span>Drones</span></a>
+      <a class="wordmark" href={sitePath('/')} aria-label="WhewayDrones home"><BrandLogo /></a>
       <p>Drone photogrammetry, aerial property capture and visual 3D models for property owners, agents and developers across Somerset.</p>
       <a class="footer-action" href={sitePath('/#contact')}>Start with a site check <ArrowIcon size={18} /></a>
     </div>

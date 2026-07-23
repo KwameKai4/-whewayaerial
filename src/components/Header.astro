@@ -1,10 +1,11 @@
 ---
 import ArrowIcon from './ArrowIcon.astro';
+import BrandLogo from './BrandLogo.astro';
 import { sitePath } from '../utils/sitePath';
 ---
 
 <header class="site-header" data-header>
-  <a class="wordmark" href={sitePath('/')} aria-label="WhewayDrones home">Wheway<span>Drones</span></a>
+  <a class="wordmark" href={sitePath('/')} aria-label="WhewayDrones home"><BrandLogo /></a>
   <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
     <span class="sr-only">Open navigation</span>
     <span></span><span></span>

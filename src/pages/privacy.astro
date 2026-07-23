@@ -1,11 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import BrandLogo from '../components/BrandLogo.astro';
 import Footer from '../components/Footer.astro';
 import { sitePath } from '../utils/sitePath';
 ---
 <BaseLayout title="Privacy notice | WhewayDrones" description="How WhewayDrones collects, uses, stores and protects information submitted through the website.">
   <main class="legal-page topo-bg">
-    <a class="wordmark" href={sitePath('/')}>Wheway<span>Drones</span></a>
+    <a class="wordmark" href={sitePath('/')} aria-label="WhewayDrones home"><BrandLogo /></a>
     <article>
       <p class="section-label">Privacy</p>
       <h1>Your enquiry stays your enquiry.</h1>
