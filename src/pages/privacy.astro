@@ -9,20 +9,22 @@ import { sitePath } from '../utils/sitePath';
     <article>
       <p class="section-label">Privacy</p>
       <h1>Your enquiry stays your enquiry.</h1>
-      <p>This notice explains how WhewayAerial uses the personal information you provide through this website or by email. WhewayAerial is responsible for deciding how that information is used. Privacy questions can be sent to <a href="mailto:hello@whewayaerial.co.uk">hello@whewayaerial.co.uk</a>.</p>
+      <p>This notice explains how WhewayAerial uses the personal information you provide through this website or by email. WhewayAerial is responsible for deciding how that information is used. Privacy questions can be sent to <a href="mailto:job@whewaydrones.co.uk">job@whewaydrones.co.uk</a>.</p>
       <h2>Information collected</h2>
       <p>An enquiry may include your name, email address, optional phone number, project location, requested service and the project information you choose to provide. Please avoid including sensitive personal information that is not needed to assess the work.</p>
       <h2>Why it is used</h2>
       <p>The information is used to respond to your enquiry, check likely site feasibility, prepare a quote and administer any project that follows. The lawful basis is WhewayAerial’s legitimate interest in responding to requested business enquiries and, where work proceeds, taking steps toward or performing a contract.</p>
       <h2>Form processing and sharing</h2>
-      <p>The website uses Netlify Forms to receive and store submissions on WhewayAerial’s behalf. Information may also be handled by the email and hosting providers needed to respond and operate the website. It is not sold and is not used for unrelated marketing. Information is shared with another professional only when necessary for the requested work, required by law or agreed with you.</p>
+      <p>The enquiry form is processed by Cloudflare on WhewayAerial’s behalf. Cloudflare Turnstile checks submissions for automated abuse, and a Cloudflare Worker validates the form and delivers the enquiry to WhewayAerial’s Gmail inbox. The website and form do not keep a separate database of submissions. Information is not sold or used for unrelated marketing. It is shared with another professional only when necessary for the requested work, required by law or agreed with you.</p>
+      <h2>Spam and abuse protection</h2>
+      <p>Cloudflare receives ordinary technical request data, including your IP address, while serving the spam check and form endpoint. The form Worker transforms the connecting IP address with a secret one-way HMAC before using the resulting digest for a short, three-attempts-per-minute rate limit. WhewayAerial does not store or log the raw IP address, the digest, your message contents or your email address in Worker logs. Operational logs contain only a request identifier, outcome category and status.</p>
       <h2>How long it is kept</h2>
       <p>Enquiries that do not become projects are normally deleted within 12 months of the last meaningful contact. If work proceeds, relevant correspondence and project records may be kept longer where needed for contracts, accounting, insurance, legal obligations or the establishment and defence of legal claims.</p>
       <h2>Your rights</h2>
-      <p>You may ask for access to your personal information, request correction or deletion, restrict its use, or object to processing based on legitimate interests. These rights can depend on the circumstances and are not always absolute. Email <a href="mailto:hello@whewayaerial.co.uk">hello@whewayaerial.co.uk</a> to make a request.</p>
+      <p>You may ask for access to your personal information, request correction or deletion, restrict its use, or object to processing based on legitimate interests. These rights can depend on the circumstances and are not always absolute. Email <a href="mailto:job@whewaydrones.co.uk">job@whewaydrones.co.uk</a> to make a request.</p>
       <p>If you remain concerned about how your information is handled, you can complain to the <a href="https://ico.org.uk/make-a-complaint/" rel="external">Information Commissioner’s Office</a>.</p>
       <h2>Updates</h2>
-      <p>This notice was last updated on 14 July 2026 and will be reviewed when the website’s forms, hosting or data handling changes.</p>
+      <p>This notice was last updated on 23 July 2026 and will be reviewed when the website’s forms, hosting or data handling changes.</p>
       <a class="button" href={sitePath('/')}>Back to the site</a>
     </article>
   </main>

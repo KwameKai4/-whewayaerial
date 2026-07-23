@@ -10,9 +10,6 @@ permissions:
   pages: write
   id-token: write
 
-env:
-  DEPLOY_CUSTOM_DOMAIN: ${{ vars.DEPLOY_CUSTOM_DOMAIN }}
-
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -26,6 +23,8 @@ jobs:
 
       - name: Build and upload Astro site
         uses: withastro/action@v6
+        env:
+          PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.PUBLIC_TURNSTILE_SITE_KEY }}
 
   deploy:
     needs: build

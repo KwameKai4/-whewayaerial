@@ -258,7 +258,7 @@
   .contact-copy a { color: var(--accent); }
   .contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: var(--section-space) var(--gutter); }
   .field { display: flex; flex-direction: column; gap: .4rem; }
-  .field-wide, .service-choice, .submit-button, .form-note { grid-column: 1 / -1; }
+  .field-wide, .service-choice, .turnstile-field, .submit-button, .form-note, .form-fallback { grid-column: 1 / -1; }
   .field label, .service-choice legend { color: #e4e6e2; font-size: .82rem; }
   .field input, .field textarea { width: 100%; color: var(--text); background: var(--surface-2); border: 1px solid var(--line-strong); border-radius: .2rem; padding: .85rem 1rem; font-size: .94rem; transition: border-color .2s ease, background .2s ease; }
   .field input:hover, .field textarea:hover { border-color: rgba(230,234,229,.55); }
@@ -276,6 +276,11 @@
   .service-choice input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 3px; }
   .submit-button { width: 100%; margin-top: .2rem; }
   .form-note { min-height: 1.15rem; font-size: .73rem; }
+  .form-note.is-error { color: #ff9b86; }
+  .form-fallback { color: var(--faint); font-size: .78rem; }
+  .form-fallback a { color: var(--accent); }
+  .turnstile-field { min-height: 4.1rem; overflow: hidden; }
+  .submit-button[aria-busy="true"] { cursor: wait; opacity: .72; }
   .honeypot { position: absolute; left: -9999px; }
 
   .service-page-hero { position: relative; display: grid; grid-template-columns: 1.08fr .92fr; min-height: 44rem; overflow: hidden; background: var(--bg-deep); border-bottom: 1px solid var(--line); }
@@ -455,7 +460,7 @@
     .contact-copy { padding: var(--section-space) var(--gutter) 3rem; border-right: 0; border-bottom: 1px solid var(--line-strong); }
     .contact-copy > p:last-child { margin-top: 2.5rem; }
     .contact-form { grid-template-columns: 1fr; padding: 3rem var(--gutter) var(--section-space); }
-    .field, .service-choice, .field-wide, .submit-button, .form-note { grid-column: 1; }
+    .field, .service-choice, .field-wide, .turnstile-field, .submit-button, .form-note, .form-fallback { grid-column: 1; }
     .service-choice { grid-template-columns: 1fr 1fr; }
     .service-page-hero::after { background: linear-gradient(180deg, rgba(5,8,9,.78), rgba(5,8,9,.96) 62%, #050809); }
     .service-page-media { inset: 0; opacity: .48; }

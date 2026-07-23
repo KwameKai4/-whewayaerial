@@ -7,12 +7,21 @@
     "dev": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "verify": "astro check && astro build"
+    "verify": "astro check && astro build && npm run worker:types && npm run worker:test && npm run worker:dry-run",
+    "worker:types": "wrangler types --cwd worker --config wrangler.jsonc worker-configuration.d.ts",
+    "worker:types:check": "npm run worker:types && git diff --exit-code -- worker/worker-configuration.d.ts",
+    "worker:test": "vitest run --config worker/vitest.config.ts",
+    "worker:dry-run": "wrangler deploy --config worker/wrangler.jsonc --dry-run",
+    "worker:deploy": "wrangler deploy --config worker/wrangler.jsonc"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
     "@astrojs/sitemap": "^3.7.3",
     "astro": "^7.0.9",
     "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.10",
+    "wrangler": "^4.114.0"
   }
 }

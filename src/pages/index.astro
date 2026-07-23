@@ -6,9 +6,12 @@ import Footer from '../components/Footer.astro';
 import ArrowIcon from '../components/ArrowIcon.astro';
 import heroImage from '../assets/hero-photogrammetry.png';
 import mappedImage from '../assets/mapped-property.png';
-import { isRepositoryPreview, sitePath } from '../utils/sitePath';
+import { sitePath } from '../utils/sitePath';
 
-const siteEmail = 'hello@whewayaerial.co.uk';
+const siteEmail = 'job@whewaydrones.co.uk';
+const formEndpoint = 'https://forms.whewaydrones.co.uk/enquiry';
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? '';
+const formReady = Boolean(turnstileSiteKey);
 
 const audiencePaths = [
   {
@@ -64,12 +67,12 @@ const faqs = [
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
-    { '@type': 'WebSite', '@id': 'https://whewayaerial.co.uk/#website', url: 'https://whewayaerial.co.uk/', name: 'WhewayAerial', inLanguage: 'en-GB' },
+    { '@type': 'WebSite', '@id': 'https://whewaydrones.co.uk/#website', url: 'https://whewaydrones.co.uk/', name: 'WhewayAerial', inLanguage: 'en-GB' },
     {
       '@type': 'Organization',
-      '@id': 'https://whewayaerial.co.uk/#organization',
+      '@id': 'https://whewaydrones.co.uk/#organization',
       name: 'WhewayAerial',
-      url: 'https://whewayaerial.co.uk/',
+      url: 'https://whewaydrones.co.uk/',
       email: siteEmail,
       areaServed: [{ '@type': 'AdministrativeArea', name: 'Somerset' }, { '@type': 'City', name: 'Taunton' }],
       description: 'Taunton-based drone photogrammetry, property capture and visual 3D modelling across Somerset.',
@@ -304,28 +307,39 @@ const jsonLd = {
         <p class="contact-reassurance">Share the location and intended outcome. Access, airspace and likely deliverables are reviewed before a quote.</p>
         <p>Prefer email?<br /><a href={`mailto:${siteEmail}`}>{siteEmail}</a></p>
       </div>
-      <form class="contact-form reveal" name="enquiry" method="POST" action={sitePath('/thanks')} data-netlify="true" netlify-honeypot="company-website">
-        <input type="hidden" name="form-name" value="enquiry" />
-        <p class="honeypot"><label>Do not fill this out: <input name="company-website" /></label></p>
-        <div class="field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" placeholder="Your name" required /></div>
-        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required /></div>
-        <div class="field"><label for="location">Project location</label><input id="location" name="location" autocomplete="address-level2" placeholder="e.g. Taunton, Somerset" required /></div>
-        <div class="field"><label for="phone">Phone (optional)</label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="Only if you would like a call" /></div>
+      <form class="contact-form reveal" name="enquiry" method="POST" action={formEndpoint} data-form-ready={String(formReady)}>
+        <p class="honeypot"><label>Do not fill this out: <input name="company-website" tabindex="-1" autocomplete="off" /></label></p>
+        <div class="field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" placeholder="Your name" minlength="2" maxlength="100" required /></div>
+        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" maxlength="254" required /></div>
+        <div class="field"><label for="location">Project location</label><input id="location" name="location" autocomplete="address-level2" placeholder="e.g. Taunton, Somerset" minlength="2" maxlength="200" required /></div>
+        <div class="field"><label for="phone">Phone (optional)</label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="Only if you would like a call" maxlength="50" /></div>
         <fieldset class="service-choice">
           <legend>Service</legend>
           {['Building capture', 'Visual 3D twin', 'Mapped site', 'Progress monitoring', 'Not sure yet'].map((service, index) => (
             <label><input type="radio" name="service" value={service} checked={index === 4} /><span>{service}</span></label>
           ))}
         </fieldset>
-        <div class="field field-wide"><label for="message">What do you need captured or delivered?</label><textarea id="message" name="message" rows="5" placeholder="Tell me about your project..." required></textarea></div>
-        <button class="button submit-button" type="submit" disabled={isRepositoryPreview}>
-          {isRepositoryPreview ? 'Enquiries open at launch' : 'Check my site'} <ArrowIcon />
+        <div class="field field-wide"><label for="message">What do you need captured or delivered?</label><textarea id="message" name="message" rows="5" placeholder="Tell me about your project..." minlength="10" maxlength="4000" required></textarea></div>
+        {formReady && (
+          <div class="turnstile-field" aria-label="Spam protection">
+            <div
+              class="cf-turnstile"
+              data-sitekey={turnstileSiteKey}
+              data-theme="dark"
+              data-action="enquiry"
+              data-appearance="interaction-only"
+            ></div>
+          </div>
+        )}
+        <button class="button submit-button" type="submit" disabled={!formReady}>
+          {formReady ? 'Check my site' : 'Online form setup in progress'} <ArrowIcon />
         </button>
-        <p class="form-note" aria-live="polite">
-          {isRepositoryPreview
-            ? 'Preview site. Online enquiries will open when whewayaerial.co.uk and its form service are connected.'
-            : 'No obligation. Site feasibility is checked before a quote. Your details are only used to respond to this enquiry.'}
+        <p class="form-note" id="enquiry-status" aria-live="polite">
+          {formReady
+            ? 'No obligation. Site feasibility is checked before a quote. Your details are only used to respond to this enquiry.'
+            : 'The protected online form is being connected. You can still email your project details directly.'}
         </p>
+        <p class="form-fallback">Email fallback: <a href={`mailto:${siteEmail}`}>{siteEmail}</a></p>
       </form>
     </section>
   </main>
@@ -333,6 +347,8 @@ const jsonLd = {
   <a class="mobile-quote-bar" href="#contact">Check your site <ArrowIcon size={18} /></a>
 
   <Footer />
+
+  {formReady && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
 
   <script>
     const revealElements = document.querySelectorAll<HTMLElement>('.reveal');
@@ -378,6 +394,7 @@ const jsonLd = {
 
     const form = document.querySelector<HTMLFormElement>('.contact-form');
     const formNote = document.querySelector<HTMLElement>('.form-note');
+    const submitButton = form?.querySelector<HTMLButtonElement>('.submit-button');
     form?.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[required]').forEach((field) => {
       field.addEventListener('invalid', () => {
         field.setAttribute('aria-invalid', 'true');
@@ -386,6 +403,43 @@ const jsonLd = {
       field.addEventListener('input', () => {
         if (field.checkValidity()) field.removeAttribute('aria-invalid');
       });
+    });
+
+    form?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form.reportValidity() || !formNote || !submitButton) return;
+
+      const formData = new FormData(form);
+      if (!formData.get('cf-turnstile-response')) {
+        formNote.classList.add('is-error');
+        formNote.textContent = 'Please wait for the spam check to finish, then try again.';
+        return;
+      }
+
+      submitButton.disabled = true;
+      submitButton.setAttribute('aria-busy', 'true');
+      formNote.classList.remove('is-error');
+      formNote.textContent = 'Sending your enquiry securely…';
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: { Accept: 'application/json' },
+        });
+        const result = await response.json().catch(() => null) as { message?: string } | null;
+        if (!response.ok) throw new Error(result?.message ?? 'The form service did not accept the enquiry.');
+        window.location.assign('/thanks/');
+      } catch (error) {
+        const message = error instanceof Error ? error.message : 'The form service is temporarily unavailable.';
+        formNote.classList.add('is-error');
+        formNote.textContent = `${message} Your details are still here—retry, or use the email fallback below.`;
+        const turnstile = (window as Window & { turnstile?: { reset: () => void } }).turnstile;
+        turnstile?.reset();
+      } finally {
+        submitButton.disabled = false;
+        submitButton.removeAttribute('aria-busy');
+      }
     });
   </script>
 </BaseLayout>

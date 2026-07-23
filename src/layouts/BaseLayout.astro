@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import { getImage } from 'astro:assets';
 import defaultSocialImage from '../assets/hero-photogrammetry.png';
-import { isRepositoryPreview, sitePath } from '../utils/sitePath';
+import { sitePath } from '../utils/sitePath';
 
 interface Props {
   title: string;
@@ -14,7 +14,7 @@ interface Props {
 const {
   title,
   description,
-  robots = isRepositoryPreview ? 'noindex, nofollow' : 'index, follow, max-image-preview:large',
+  robots = 'index, follow, max-image-preview:large',
   ogImage,
 } = Astro.props;
 const canonicalURL = new URL(sitePath(Astro.url.pathname), Astro.site);

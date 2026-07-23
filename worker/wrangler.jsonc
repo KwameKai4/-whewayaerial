@@ -1,0 +1,42 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "whewaydrones-enquiry",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-07-23",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": false,
+  "routes": [
+    {
+      "pattern": "forms.whewaydrones.co.uk",
+      "custom_domain": true
+    }
+  ],
+  "vars": {
+    "ALLOWED_ORIGINS": "https://whewaydrones.co.uk,https://www.whewaydrones.co.uk",
+    "TURNSTILE_HOSTNAME": "whewaydrones.co.uk"
+  },
+  "secrets": {
+    "required": ["TURNSTILE_SECRET_KEY", "IP_HASH_SECRET"]
+  },
+  "send_email": [
+    {
+      "name": "EMAIL",
+      "destination_address": "kwame.whe@gmail.com",
+      "allowed_sender_addresses": ["website@whewaydrones.co.uk"]
+    }
+  ],
+  "ratelimits": [
+    {
+      "name": "FORM_RATE_LIMITER",
+      "namespace_id": "42073",
+      "simple": {
+        "limit": 3,
+        "period": 60
+      }
+    }
+  ],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  }
+}
