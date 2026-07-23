@@ -67,11 +67,11 @@ const faqs = [
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
-    { '@type': 'WebSite', '@id': 'https://whewaydrones.co.uk/#website', url: 'https://whewaydrones.co.uk/', name: 'WhewayAerial', inLanguage: 'en-GB' },
+    { '@type': 'WebSite', '@id': 'https://whewaydrones.co.uk/#website', url: 'https://whewaydrones.co.uk/', name: 'WhewayDrones', inLanguage: 'en-GB' },
     {
       '@type': 'Organization',
       '@id': 'https://whewaydrones.co.uk/#organization',
-      name: 'WhewayAerial',
+      name: 'WhewayDrones',
       url: 'https://whewaydrones.co.uk/',
       email: siteEmail,
       areaServed: [{ '@type': 'AdministrativeArea', name: 'Somerset' }, { '@type': 'City', name: 'Taunton' }],
@@ -81,7 +81,7 @@ const jsonLd = {
 };
 ---
 
-<BaseLayout title="Drone Photogrammetry Somerset | WhewayAerial" description="Taunton-based drone photogrammetry for property owners, agents and developers. Building capture, orthomosaics and visual 3D models across Somerset.">
+<BaseLayout title="Drone Photogrammetry Somerset | WhewayDrones" description="Taunton-based drone photogrammetry for property owners, agents and developers. Building capture, orthomosaics and visual 3D models across Somerset.">
   <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <Header />
   <main id="top">
@@ -277,7 +277,7 @@ const jsonLd = {
       <div class="about-copy reveal">
         <p class="section-label">About</p>
         <h2 id="about-title">Independent.<br />Taunton-based.</h2>
-        <p>WhewayAerial is a founder-led drone studio focused on turning aerial imagery into useful property views, maps and visual 3D models. You deal directly with the operator from the first site check to delivery.</p>
+        <p>WhewayDrones is a founder-led drone studio focused on turning aerial imagery into useful property views, maps and visual 3D models. You deal directly with the operator from the first site check to delivery.</p>
         <p class="operator-note">Operator registration, relevant remote-pilot competency and third-party insurance can be verified during scoping and before booking.</p>
       </div>
       <div class="trust-list reveal">

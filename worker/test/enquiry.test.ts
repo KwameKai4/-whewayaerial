@@ -57,7 +57,7 @@ const successfulTurnstile = vi.fn(async () => Response.json({
   action: 'enquiry',
 })) as unknown as typeof fetch;
 
-describe('WhewayAerial enquiry Worker', () => {
+describe('WhewayDrones enquiry Worker', () => {
   beforeEach(() => {
     vi.spyOn(console, 'log').mockImplementation(() => undefined);
   });
@@ -73,6 +73,11 @@ describe('WhewayAerial enquiry Worker', () => {
       from: 'website@whewaydrones.co.uk',
       to: 'kwame.whe@gmail.com',
       replyTo: 'visitor@example.com',
+      text: expect.stringContaining('New WhewayDrones website enquiry'),
+      html: expect.stringContaining('<h1>New WhewayDrones website enquiry</h1>'),
+      headers: expect.objectContaining({
+        'X-WhewayDrones-Request-ID': expect.any(String),
+      }),
       subject: 'Mapped site enquiry — Taunton, Somerset',
     }));
   });

@@ -1,4 +1,4 @@
-# WhewayAerial
+# WhewayDrones
 
 Astro website for a Taunton-based drone photogrammetry and visual 3D property modelling service.
 

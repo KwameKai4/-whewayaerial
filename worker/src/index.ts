@@ -84,7 +84,7 @@ const errorPage = (message: string) => `<!doctype html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Enquiry not sent | WhewayAerial</title>
+    <title>Enquiry not sent | WhewayDrones</title>
     <style>
       :root{color-scheme:dark}body{margin:0;background:#080c0e;color:#f0f2ee;font:16px/1.6 system-ui,sans-serif}
       main{max-width:42rem;margin:12vh auto;padding:2rem}p{color:#bdc3be}a{color:#dfff00}
@@ -225,7 +225,7 @@ const validateTurnstile = async (
 };
 
 const enquiryText = (enquiry: Enquiry, requestId: string) => [
-  'New WhewayAerial website enquiry',
+  'New WhewayDrones website enquiry',
   '',
   `Request ID: ${requestId}`,
   `Name: ${enquiry.name}`,
@@ -240,7 +240,7 @@ const enquiryText = (enquiry: Enquiry, requestId: string) => [
 
 const enquiryHtml = (enquiry: Enquiry, requestId: string) => {
   const row = (label: string, value: string) => `<tr><th align="left" style="padding:6px 14px 6px 0">${escapeHtml(label)}</th><td style="padding:6px 0">${escapeHtml(value)}</td></tr>`;
-  return `<h1>New WhewayAerial website enquiry</h1>
+  return `<h1>New WhewayDrones website enquiry</h1>
 <table>
 ${row('Request ID', requestId)}
 ${row('Name', enquiry.name)}
@@ -338,7 +338,7 @@ export const handleRequest = async (
       html: enquiryHtml(enquiry, requestId),
       replyTo: enquiry.email,
       headers: {
-        'X-WhewayAerial-Request-ID': requestId,
+        'X-WhewayDrones-Request-ID': requestId,
       },
     });
   } catch {
